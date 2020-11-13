@@ -1,5 +1,5 @@
 """
-Read and write .rc2 files given DMX.
+Read .sc2 files into DMX.
 
   1. Header
   2. Sequence of Show Control Frames
@@ -29,11 +29,7 @@ Frames are 545 bytes and begin at 00200h.
 
 """
 
-
-import codecs
-import math
 import numpy as np
-
 
 class RC2:
     
@@ -41,30 +37,12 @@ class RC2:
     frame_size = 545
     
     
-    def __init__(self, filename, numFrames):
+    def __init__(self, filename):
         self.filename = filename
-        
-    def write(self, binaryData):
-        """ Write the data. Goal is to recreate identical .sc2 file from one provided, so that
-            any binary data can be converted to .sc2
-        """
-        
-        # Write header
-        b = bytearray(799482)
-        b[0:8] = b'SHC21.00'
-        b[(self.header_size-4):self.header_size] = numFrames.to_bytes(2, byteorder='little')
-        
-        #Write frames
-        #for i in range(numFrames):
-            
-        
-        f = open('newsc2.sc2', 'wb')
-        return b
     
     def read(self):
         """ Read the data.
         """
-
 
         f = open(self.filename, 'rb')
         b = f.read()
@@ -73,7 +51,6 @@ class RC2:
         # Number of frames
         num_frames = int.from_bytes(b[(self.header_size-4):self.header_size], byteorder='little')
 
-        print("there are {} frames".format(num_frames))
 
         frames = []
         for i in range(num_frames):
@@ -89,13 +66,11 @@ class RC2:
     
         self.frames = np.array(frames)
         return self.frames
-        
 
-        
         
 if __name__ == '__main__':
     
     R = RC2('volcano.sc2')
     binaryFrames = R.read()
     
-    newSC2 = R.write(binaryFrames, 1466) #change 1466 to something from read
+    newSC2 = R.write(binaryFrames, 1466) 
