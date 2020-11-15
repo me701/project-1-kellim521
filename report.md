@@ -19,8 +19,10 @@ This is the main file in my project. When ran it takes user input for a channel 
 I developed two different unit tests for my code, and would like to add a couple more for project two with different sources for data. The first compares a binary file in the .sc2 format used by commercial DMX devices to a file produced by my code for the same frame data. The second test uses a function with generates random frame data for time (t), and verifies that when the user enters a this function name and parameters, the two files produced match.
 
 `rc2_tools.py`
-Finally, I used a slightly modified version of this file provided on Canvas to read frame data from the volcano.sc2 file and store it in an array. This array is what I used as a data source for my first unit test.
+Finally, I used a slightly modified version of this file provided on Canvas to read frame data from the volcano.sc2 file and store it in an array. This array is what I used as a data source to convert to binary for my first unit test.
 
 ## Results
+My code successfully passed the unit tests I made. It converted the data from a given array of frames and the data from the test function I created into binary that can be used with a DMX device.
+
 ## Repository
 [Project 1](https://github.com/me701/project-1-kellim521)
